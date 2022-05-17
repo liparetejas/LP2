@@ -5,6 +5,7 @@ Assignment codes and output
 ### 1. DFS & BFS
 ### 2. A* Algorithm
 ### 3. Greedy Algorithms
+  - Striver's Kruskal: https://takeuforward.org/data-structure/minimum-spanning-tree-mst-using-kruskals-algo/
 ### 4. N Queens Problem
 ### 5. Chatbot
   - Linux: 
