@@ -1,0 +1,54 @@
+salesforce2
+
+public with sharing class ContactController {
+
+    public Contact c { get; set; }
+    
+        public List<Contact> samepage { get; set; }
+        
+        public ContactController(){
+        c=new Contact();
+    }
+
+    public PageReference save() {
+        try {
+           insert c;
+           samepage= [select id,FirstName,LastName,Email,Birthdate from Contact where id=:c.id];
+                
+        } catch(DmlException e) {
+            System.debug('The following exception has occurred: ' + e.getMessage());
+        }        
+        
+        return null;
+	}
+}
+
+
+<apex:page Controller="ContactController" >
+<apex:form >
+<apex:pageBlock title="Edit Contact">
+<apex:pageBlockSection columns="1">
+<apex:inputField value="{!c.FirstName}"/>
+<apex:inputField value="{!c.LastName}"/>
+<apex:inputField value="{!c.Email}"/>
+<apex:inputField value="{!c.Birthdate}"/>
+</apex:pageBlockSection>
+<apex:pageBlockButtons >
+<apex:commandButton action="{!save}" value="Save"/>
+</apex:pageBlockButtons>
+<apex:pageBlockTable value="{!samepage}" var="c">
+<apex:column headerValue="First Name">
+<apex:outputField value="{!c.Firstname}"/>
+</apex:column>
+<apex:column headerValue="Last Name">
+<apex:outputField value="{!c.Lastname}"/>
+</apex:column>
+<apex:column headerValue="Email Id">
+<apex:outputField value="{!c.Email}"/>
+</apex:column>
+
+</apex:pageBlockTable>
+</apex:pageBlock>
+
+</apex:form>
+</apex:page>
